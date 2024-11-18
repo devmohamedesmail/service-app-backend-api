@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api_controllers\AdsController;
 use App\Http\Controllers\api_controllers\CategoryController;
 use App\Http\Controllers\api_controllers\PortfolioController;
+use App\Http\Controllers\api_controllers\StoriesController;
 use App\Http\Controllers\api_controllers\UserController;
 use App\Http\Controllers\AuthController;
 
@@ -59,3 +60,10 @@ Route::controller(UserController::class)->group(function () {
    Route::get('/delete/user/{id}', 'delete_user');
 
 });
+
+// ********************** Stories controller ***********************
+Route::controller(StoriesController::class)->group(function () {
+   Route::post('/add/story/{id}', 'add_user_story');
+   Route::get('/show/stories/data', 'show_stories_data');
+   Route::get('/delete/story/{id}', 'delete_user_story');
+ });
