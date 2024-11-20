@@ -14,10 +14,8 @@ class PortfolioController extends Controller
          try {
              $portfolio = new Portfolio();
              $portfolio->user_id = $request->user_id;
-             $portfolio->category_id = $request->category_id;
              $portfolio->title = $request->title;
              $portfolio->description = $request->description;
-             $portfolio->image = $request->image;
              $image = $request->image;
  
              if ($image) {
@@ -53,7 +51,6 @@ class PortfolioController extends Controller
              $portfolio = Portfolio::find($id);
              $portfolio->title = $request->title;
              $portfolio->description = $request->description;
-             $portfolio->image = $request->image;
              $image = $request->image;
  
              if ($image) {

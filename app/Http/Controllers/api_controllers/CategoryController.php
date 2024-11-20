@@ -14,7 +14,8 @@ class CategoryController extends Controller
 
         try {
             $category = new Category();
-            $category->name = $request->name;
+            $category->nameEn = $request->nameEn;
+            $category->nameAr = $request->nameAr;
             $category->slug = $request->slug;
             $category->description = $request->description;
             $image = $request->file('image');
@@ -58,7 +59,8 @@ class CategoryController extends Controller
     {
         try {
             $category =  Category::findOrFail($id);
-            $category->name = $request->name;
+            $category->nameEn = $request->nameEn;
+            $category->nameAr = $request->nameAr;
             $category->slug = $request->slug;
             $category->description = $request->description;
             $image = $request->file('image');

@@ -28,13 +28,10 @@ class AdsController extends Controller
             $ad->email = $request->email;
             $ad->website = $request->website;
             $ad->whatsup = $request->whatsup;
-            $ad->address = $request->address;
             $ad->city = $request->city;
-            $ad->state = $request->state;
             $ad->country = $request->country;
             $ad->price = $request->price;
-            $ad->price_unit = $request->price_unit;
-            $ad->price_type = $request->price_type;
+            
             $image = $request->file('image');
             if ($image) {
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
