@@ -13,4 +13,8 @@ class Portfolio extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    protected $casts = [
+        "images" => "array",
+    ];
 }

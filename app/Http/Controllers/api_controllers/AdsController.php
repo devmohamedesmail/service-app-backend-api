@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api_controllers;
 use App\Models\Ad;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class AdsController extends Controller
@@ -19,7 +20,7 @@ class AdsController extends Controller
             $ad->user_id = $request->user_id;
             $ad->category_id = $request->category_id;
             $ad->title = $request->title;
-            $ad->category = $category->name;
+            $ad->categoryName = $category->name;
             $ad->description = $request->description;
             $ad->link = $request->link;
             $ad->position = $request->position;
@@ -31,13 +32,19 @@ class AdsController extends Controller
             $ad->city = $request->city;
             $ad->country = $request->country;
             $ad->price = $request->price;
-            
-            $image = $request->file('image');
-            if ($image) {
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/ads'), $imageName);
-                $ad->image = $imageName;
+
+            $imageNames = [];
+            if ($request->hasFile('images')) {
+
+                foreach ($request->file('images') as $image) {
+                    $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension(); // Create a unique filename
+                    $image->move(public_path('uploads/ads'), $imageName); // Move image to the specified directory
+                    $imageNames[] = $imageName;
+                }
+                $ad->images = $imageNames;
+                $ad->save();
             }
+
             $ad->save();
             return response()->json(['message' => 'Ad added successfully'], 200);
         } catch (\Throwable $th) {
@@ -64,31 +71,33 @@ class AdsController extends Controller
     {
         try {
             $ad =  Ad::findOrFail($id);
-            $ad->user_id = $request->user_id;
+            $category = Category::find($request->category_id);
             $ad->category_id = $request->category_id;
             $ad->title = $request->title;
+            $ad->categoryName = $category->name;
             $ad->description = $request->description;
             $ad->link = $request->link;
             $ad->position = $request->position;
-            $ad->type = $request->type;
             $ad->type = $request->type;
             $ad->phone = $request->phone;
             $ad->email = $request->email;
             $ad->website = $request->website;
             $ad->whatsup = $request->whatsup;
-            $ad->address = $request->address;
             $ad->city = $request->city;
-            $ad->state = $request->state;
             $ad->country = $request->country;
             $ad->price = $request->price;
-            $ad->price_unit = $request->price_unit;
-            $ad->price_type = $request->price_type;
-            $image = $request->file('image');
-            if ($image) {
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/ads'), $imageName);
-                $ad->image = $imageName;
+
+            $imageNames = [];
+            if ($request->hasFile('images')) {
+
+                foreach ($request->file('images') as $image) {
+                    $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension(); // Create a unique filename
+                    $image->move(public_path('uploads/ads'), $imageName); // Move image to the specified directory
+                    $imageNames[] = $imageName; // Add image name to array
+                }
+                $ad->images = $imageNames;
             }
+
             $ad->save();
             return response()->json(['message' => 'Ad updated successfully'], 200);
         } catch (\Throwable $th) {

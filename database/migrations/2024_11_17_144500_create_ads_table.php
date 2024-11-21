@@ -17,12 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
-            $table->longText('image')->nullable();
+            $table->json('images')->nullable();
             $table->string('link')->nullable();
             $table->boolean('is_active')->default(true); 
             $table->string('position')->nullable();
             $table->string('type')->nullable();
-            $table->string('category')->nullable();
+            $table->string('categoryName')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();

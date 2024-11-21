@@ -22,4 +22,8 @@ class Ad extends Model
      {
          return $this->belongsTo(User::class);
      }
+
+     protected $casts = [
+        "images" => "array",
+    ];
 }
