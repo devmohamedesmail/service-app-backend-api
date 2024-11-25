@@ -16,6 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    Mail::to('dev.mohamed.esmail@gmail.com')->send(new RegisterUser);
-    return "send";
+    return view('welcome');
 });

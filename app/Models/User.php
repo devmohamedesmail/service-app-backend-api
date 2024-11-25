@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Article;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
@@ -75,6 +76,9 @@ class User extends Authenticatable implements JWTSubject
     // relationship with stories
     public function stories(){
       return $this->hasMany(Story::class);
+    }
+    public function articles(){
+      return $this->hasMany(Article::class);
     }
 
 

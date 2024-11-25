@@ -3,7 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api_controllers\AdsController;
+use App\Http\Controllers\api_controllers\AdtypeController;
+use App\Http\Controllers\api_controllers\ArticlesController;
 use App\Http\Controllers\api_controllers\CategoryController;
+use App\Http\Controllers\api_controllers\ChatController;
+use App\Http\Controllers\api_controllers\CountryController;
 use App\Http\Controllers\api_controllers\PortfolioController;
 use App\Http\Controllers\api_controllers\StoriesController;
 use App\Http\Controllers\api_controllers\UserController;
@@ -66,4 +70,35 @@ Route::controller(StoriesController::class)->group(function () {
    Route::post('/add/story/{id}', 'add_user_story');
    Route::get('/show/stories/data', 'show_stories_data');
    Route::get('/delete/story/{id}', 'delete_user_story');
+ });
+
+
+
+ Route::controller(CountryController::class)->group(function(){
+    Route::get('/add/country', 'add_country');
+    Route::get('/delete/country/{id}', 'delete_country');
+    Route::get('/update/country/{id}', 'update_country');
+    Route::get('/show/countries', 'show_countries');
+ });
+
+
+ Route::controller(AdtypeController::class)->group(function () {
+    Route::get('/add/adtype', 'add_adtype');
+    Route::get('/delete/adtype/{id}', 'delete_adtype');
+    Route::get('/show/adtypes', 'show_adtypes');
+    Route::post('/update/adtype/{id}', 'update_adtype');
+ });
+
+ Route::controller(ArticlesController::class)->group(function () {
+    Route::get('/add/article', 'add_article');
+    Route::get('/show/articles', 'show_articles');
+    Route::post('/update/article/{id}', 'update_article');
+    Route::get('/delete/article/{id}', 'delete_article');
+ });
+
+
+
+ Route::controller(ChatController::class)->group(function () {
+    Route::post('send-message',  'sendMessage');
+    Route::get('get-messages', 'getMessages');
  });

@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "php-open-source-saver/jwt-auth": "^2.7",
+        "pusher/pusher-php-server": "^7.2",
         "symfony/http-client": "^7.1",
         "symfony/mailgun-mailer": "^7.1"
     },

@@ -15,20 +15,19 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('country_id')->nullable();
+            $table->unsignedBigInteger('adtype_id')->nullable();
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->json('images')->nullable();
             $table->string('link')->nullable();
             $table->boolean('is_active')->default(true); 
             $table->string('position')->nullable();
-            $table->string('type')->nullable();
-            $table->string('categoryName')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->string('whatsup')->nullable();
             $table->string('city')->nullable();
-            $table->string('country')->nullable();
             $table->string('price')->nullable();
             $table->string('price_type')->nullable();
            

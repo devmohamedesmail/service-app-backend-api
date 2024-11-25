@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 
 class AdsController extends Controller
 {
@@ -16,11 +17,11 @@ class AdsController extends Controller
 
         try {
             $ad = new Ad();
-            $category = Category::find($request->category_id);
             $ad->user_id = $request->user_id;
             $ad->category_id = $request->category_id;
+            $ad->country_id = $request->country_id;
+            $ad->adtype_id = $request->type_id;
             $ad->title = $request->title;
-            $ad->categoryName = $category->name;
             $ad->description = $request->description;
             $ad->link = $request->link;
             $ad->position = $request->position;
@@ -30,7 +31,6 @@ class AdsController extends Controller
             $ad->website = $request->website;
             $ad->whatsup = $request->whatsup;
             $ad->city = $request->city;
-            $ad->country = $request->country;
             $ad->price = $request->price;
 
             $imageNames = [];
@@ -42,7 +42,7 @@ class AdsController extends Controller
                     $imageNames[] = $imageName;
                 }
                 $ad->images = $imageNames;
-                $ad->save();
+               
             }
 
             $ad->save();
@@ -57,7 +57,7 @@ class AdsController extends Controller
     public function show_ads(Request $request)
     {
         try {
-            $ads = Ad::with('user', 'category')->get();
+            $ads = Ad::with('user.portfolio', 'category','country','type')->inRandomOrder()->get();
             return response()->json(['data' => $ads], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage()], 500);
@@ -71,22 +71,19 @@ class AdsController extends Controller
     {
         try {
             $ad =  Ad::findOrFail($id);
-            $category = Category::find($request->category_id);
             $ad->category_id = $request->category_id;
+            $ad->country_id = $request->country_id;
+            $ad->adtype_id = $request->type_id;
             $ad->title = $request->title;
-            $ad->categoryName = $category->name;
             $ad->description = $request->description;
             $ad->link = $request->link;
             $ad->position = $request->position;
-            $ad->type = $request->type;
             $ad->phone = $request->phone;
             $ad->email = $request->email;
             $ad->website = $request->website;
             $ad->whatsup = $request->whatsup;
             $ad->city = $request->city;
-            $ad->country = $request->country;
             $ad->price = $request->price;
-
             $imageNames = [];
             if ($request->hasFile('images')) {
 

@@ -30,7 +30,7 @@ class AuthController extends Controller
         ]);
 
         $token = Auth::guard('api')->login($user);
-        Mail::to($user->email)->send(new RegisterUser);
+        // Mail::to($user->email)->send(new RegisterUser);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
