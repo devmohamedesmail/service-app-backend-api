@@ -75,22 +75,22 @@ Route::controller(StoriesController::class)->group(function () {
 
 
  Route::controller(CountryController::class)->group(function(){
-    Route::get('/add/country', 'add_country');
+    Route::post('/add/country', 'add_country');
     Route::get('/delete/country/{id}', 'delete_country');
-    Route::get('/update/country/{id}', 'update_country');
+    Route::post('/update/country/{id}', 'update_country');
     Route::get('/show/countries', 'show_countries');
  });
 
 
  Route::controller(AdtypeController::class)->group(function () {
-    Route::get('/add/adtype', 'add_adtype');
+    Route::post('/add/adtype', 'add_adtype');
     Route::get('/delete/adtype/{id}', 'delete_adtype');
     Route::get('/show/adtypes', 'show_adtypes');
     Route::post('/update/adtype/{id}', 'update_adtype');
  });
 
  Route::controller(ArticlesController::class)->group(function () {
-    Route::get('/add/article', 'add_article');
+    Route::post('/add/article', 'add_article');
     Route::get('/show/articles', 'show_articles');
     Route::post('/update/article/{id}', 'update_article');
     Route::get('/delete/article/{id}', 'delete_article');

@@ -25,12 +25,10 @@ class AdsController extends Controller
             $ad->description = $request->description;
             $ad->link = $request->link;
             $ad->position = $request->position;
-            $ad->type = $request->type;
             $ad->phone = $request->phone;
             $ad->email = $request->email;
             $ad->website = $request->website;
             $ad->whatsup = $request->whatsup;
-            $ad->city = $request->city;
             $ad->price = $request->price;
 
             $imageNames = [];

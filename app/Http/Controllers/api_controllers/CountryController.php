@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class CountryController extends Controller
 {
     // **************************** Add new country ********************************
-    public function addCountry(Request $request)
+    public function add_country(Request $request)
     {
         try {
             $country = new Country();

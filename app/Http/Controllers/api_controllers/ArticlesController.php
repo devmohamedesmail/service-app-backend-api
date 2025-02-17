@@ -13,6 +13,7 @@ class ArticlesController extends Controller
     {
         try {
             $article = new Article();
+            $article->user_id = $request->user_id;
             $article->body = $request->body;
             $imageNames = [];
             if ($request->hasFile('images')) {

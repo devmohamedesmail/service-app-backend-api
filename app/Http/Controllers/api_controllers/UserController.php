@@ -12,7 +12,7 @@ class UserController extends Controller
     public function show_user($id)
     {
         try {
-            $user = User::findOrFail($id);
+            $user = User::with('ads', 'portfolio','articles')->findOrFail($id);
             return response()->json(['status' => 'success', 'data' => $user]);
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', $th->getMessage()]);
@@ -23,7 +23,7 @@ class UserController extends Controller
     public function show_users()
     {
         try {
-            $users = User::with('ads', 'portfolios')->get();
+            $users = User::with('ads', 'portfolio')->get();
             return response()->json(['status' => 'success', 'data' => $users]);
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', $th->getMessage()]);
@@ -35,6 +35,7 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
+            $user->name = $request->name;
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->city = $request->city;
